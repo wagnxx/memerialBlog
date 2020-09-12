@@ -1,0 +1,53 @@
+/* @import '~antd/lib/style/css'; */
+/* @import '~antd/dist/antd.css'; */
+
+/* #components-layout-demo-responsive .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
+  
+  .site-layout-sub-header-background {
+    background: #fff;
+  }
+  
+  .site-layout-background {
+    background: #fff;
+  }
+  */
+
+.header_container {
+  margin-top: 8px;
+  /* height: 100%; */
+  /* border: 1px solid #000; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  z-index: 999;
+}
+
+.welcome {
+  /* background-color: brown;
+  color: #fff; */
+  /* color: #fff; */
+    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 44px;
+  height: 100%;
+  /* background-image:url('~@/assets/yay.jpg'); */
+  /* background:  url('@/assets/images/260.webp') 
+  no-repeat  center/80% 90% #000000; */
+  
+  
+}
+.content{
+  background-color: yellowgreen;
+  height: 100%;
+  color: #f00;
+}
+/* .content  .ant-layout-has-sider{
+  height: 100%;
+} */
