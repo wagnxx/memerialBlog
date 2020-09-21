@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Table, Badge, Tag, Modal, Input, message } from 'antd'
+
 import { getGroupList, createMenu, createArt } from '../../../services/api'
 import _ from 'lodash';
 
-const MenuManagePage = () => {
-
+const MenuManagePage = (props) => {
 
     const [menuList, setData] = useState([]);
 
@@ -168,7 +168,8 @@ const MenuManagePage = () => {
             >
                 <Input value={modalVal} onChange={modalInputChangeHandler}></Input>
             </Modal>
-            <h3 style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+            <h3 style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
                 <span>菜单管理</span>
                 <Button style={{ float: 'right' }} onClick={createGroup} type="primary">添加新的分组</Button>
 

@@ -30,11 +30,27 @@ class BlogsPage extends React.Component {
     this.getMenuList();
   }
 
-  getMenuList = () => {
+
+
+  fetchDefaultOpenedData() {
+    const { artList } = this.props;
+    const openedId = artList.length ? artList[0].groupId + '_' + artList[0].items[0].artId : 0;
+
+    if (openedId !== 0) {
+      this.onSelect({ selectedKeys: [openedId] })
+    }
+
+  }
+
+
+
+  getMenuList = async () => {
     this.activeTabKey("-1");
-    this.props.dispatch({
+    await this.props.dispatch({
       type: "blogs/fetchArtList",
     });
+
+    this.fetchDefaultOpenedData()
   };
 
   onSelect = async ({ item, key, keyPath, selectedKeys, domEvent }) => {
@@ -136,11 +152,18 @@ class BlogsPage extends React.Component {
       onEditorHandler,
       onPreviewHandler,
     } = this;
+    const openedId = artList.length ? artList[0].groupId + '_' + artList[0].items[0].artId : 0;
+    const openedSubId = artList.length ? 'sub' + artList[0].groupId : 0;
 
     return (
       <Layout style={{ height: "100%" }}>
         <Sider style={{ height: "100%", width: "200px" }}>
-          <Menu mode="inline" theme="dark" onSelect={onSelect}>
+          <Menu mode="inline" theme="dark" onSelect={onSelect}
+            defaultSelectedKeys={['1_1']}
+
+
+            defaultOpenKeys={['sub1']}
+          >
             {artList.map((group) => {
               return (
                 <Menu.SubMenu
@@ -149,12 +172,12 @@ class BlogsPage extends React.Component {
                 >
                   {group.items.length
                     ? group.items.map((item) => {
-                        return (
-                          <Menu.Item key={`${group.groupId}_${item.artId}`}>
-                            {item.artTitle}
-                          </Menu.Item>
-                        );
-                      })
+                      return (
+                        <Menu.Item key={`${group.groupId}_${item.artId}`}>
+                          {item.artTitle}
+                        </Menu.Item>
+                      );
+                    })
                     : ""}
                 </Menu.SubMenu>
               );

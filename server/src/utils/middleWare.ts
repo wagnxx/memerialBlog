@@ -34,7 +34,7 @@ export const entryMiddlewareSetting = (app: Application) => {
   app.use(bodyParser());
 
   const ENV = process.env.NODE_ENV;
-  if (ENV !== 'production') {
+  if (ENV == 'production') {
     app.use(
       logger('dev', {
         stream: process.stdout, // 默认配置: 将日志流输出到控制台，precess.stdout
@@ -42,7 +42,7 @@ export const entryMiddlewareSetting = (app: Application) => {
     );
   } else {
     // 若是线上环境
-    const logFileName = path.join(__dirname, 'logs', 'access.log');
+    const logFileName = path.join(__dirname, '../..','logs', 'access.log');
     const writeStream = fs.createWriteStream(logFileName, {
       // 创建文件的写入流
       flags: 'a',
