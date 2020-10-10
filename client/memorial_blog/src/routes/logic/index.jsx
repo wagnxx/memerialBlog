@@ -7,6 +7,11 @@ import { message } from "antd";
 import { connect } from "dva";
 import { saveLocalUserInfo } from "../../utils/logic";
 const LoginPage = (props) => {
+
+
+
+
+
   const onFinish = async (values) => {
     console.log(values);
     console.log("Received values of form: ", values);

@@ -34,7 +34,7 @@ function IndexPage(props) {
           <Menu mode="inline" style={{ width: 130 }}>
             <Menu.SubMenu title={username}>
               <Menu.Item>
-                <Link to="/app/b">登录</Link>
+                <Link to="/login">登录</Link>
               </Menu.Item>
               <Menu.Item>
                 <Link to="/app/blogs">帮助</Link>
