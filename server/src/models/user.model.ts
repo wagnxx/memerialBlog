@@ -5,10 +5,24 @@ import {
   HasMany,
   DataType,
   PrimaryKey,
+  ForeignKey,
+  BelongsTo,
+  Scopes,
 } from 'sequelize-typescript';
+import RolesModel from './role.model';
 
+@Scopes({
+  hasRole: {
+    include: [
+      {
+        model: () => RolesModel,
+        attributes: ['name'],
+      },
+    ],
+  },
+})
 @Table({
-  tableName:'users'
+  tableName: 'users',
 })
 export default class UsersModel extends Model<UsersModel> {
   @PrimaryKey
@@ -26,17 +40,12 @@ export default class UsersModel extends Model<UsersModel> {
   @Column
   submission_date: Date;
 
-  // get(k:string):string{
+  @ForeignKey(() => RolesModel)
+  @Column
+  role_id: number;
 
-  //   return this.getDataValue('name')
-  // }
-  // @Column
-  // get name(): string {
-  //   return this.getDataValue('name');
-  // }
- 
-  // set name(value: string) {
-  //   this.setDataValue('name', value);
-  // }
-  
+  @BelongsTo(() => RolesModel)
+  role: RolesModel;
+
+
 }

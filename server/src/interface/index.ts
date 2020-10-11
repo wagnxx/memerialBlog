@@ -4,7 +4,7 @@ import Users from 'src/models/user.model';
 export interface IApiService {
   /**
    * 测试接口
-   * @param ctx 
+   * @param ctx
    */
   getTestData(ctx: IContext): Promise<object>;
   getMenus(ctx: IContext): Promise<object>;
@@ -16,14 +16,14 @@ export interface IManageService {
   getData(ctx: IContext): Promise<object>;
   createMenu(ctx: IContext): Promise<object>;
   createArt(ctx: IContext): Promise<object>;
-
-
+  getUsers(ctx: IContext): Promise<object>;
 }
 
 export interface UserModel {
-  id: number|unknown;
+  id: number | unknown;
   name: string | any;
   passport?: string | any;
+  role_id?: number | any;
 }
 
 export interface ArtContentModel {

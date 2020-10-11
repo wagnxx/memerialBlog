@@ -11,7 +11,7 @@ import {
 } from '../ioc/index';
 import { TAGS } from '../config/TAGS';
 import { IApiService } from '../interface';
-import checkLogin from '../utils/validateAuth';
+import { VALIDATE } from '../utils/validateAuth';
 import { SuccessModel, ErrorModel } from '../../src/models/resModel';
 
 @controller('/api')
@@ -21,7 +21,7 @@ export class ApiController implements interfaces.Controller {
 
   @httpGet('/isLogin')
   private async isLogin(ctx: IContext, next: () => Promise<any>) {
-    return checkLogin(ctx, next);
+    return VALIDATE.checkLogin(ctx, next);
   }
 
   @httpPost('/login')
@@ -31,27 +31,28 @@ export class ApiController implements interfaces.Controller {
     if (user?.name) {
       ctx.session.username = user.name;
       ctx.session.userId = user.id;
+      ctx.session.roleId = user.role_id;
       ctx.body = new SuccessModel({ username: user.name });
       return;
     }
     ctx.body = new ErrorModel('登录失败');
   }
 
-  @httpPost('/getMenus', checkLogin)
+  @httpPost('/getMenus',VALIDATE.checkLogin)
   private async menu(ctx: IContext, next: () => Promise<any>) {
     const data = await this.apiService.getMenus(ctx);
-    ctx.body = new SuccessModel(data)
+    ctx.body = new SuccessModel(data);
   }
 
-  @httpPost('/getArtContent')
+  @httpPost('/getArtContent',VALIDATE.checkLogin)
   private async getArtContent(ctx: IContext, next: () => Promise<any>) {
     console.log(ctx.request);
     const data = await this.apiService.getArtContent(ctx);
 
-    ctx.body = new SuccessModel(data)
+    ctx.body = new SuccessModel(data);
   }
 
-  @httpPost('/saveArt')
+  @httpPost('/saveArt',VALIDATE.checkLogin)
   private async saveArt(ctx: IContext, next: () => Promise<any>) {
     console.log(ctx.request);
     const data = await this.apiService.saveArt(ctx);
@@ -70,8 +71,7 @@ export class ApiController implements interfaces.Controller {
   @httpGet('/test')
   private async index(ctx: IContext, next: () => Promise<any>) {
     const data = await this.apiService.getTestData(ctx);
-    ctx.body = new SuccessModel(data)
-    
+    ctx.body = new SuccessModel(data);
   }
 
   // @httpGet('/')

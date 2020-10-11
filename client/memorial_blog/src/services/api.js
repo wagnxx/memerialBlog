@@ -20,7 +20,12 @@ export const getArtContent = (body) =>
 export const saveArt = (body) => request(`${prePath}/saveArt`, body, "POST");
 
 export const getGroupList = (body) => request(`${prePath}/manage/getMenu`);
+
 export const createMenu = (body) =>
   request(`${prePath}/manage/createMenu`, body, "POST");
+
 export const createArt = (body) =>
   request(`${prePath}/manage/createArt`, body, "POST");
+
+export const getUsers = (body) =>
+  request(`${prePath}/manage/getUsers`);

@@ -7,6 +7,16 @@ import { ErrorModel, SuccessModel } from '../models/resModel';
 
 @provide(TAGS.MANAGE)
 class ManageService implements IManageService {
+  getUsers(ctx: IContext): Promise<object> {
+    let result = sequelize.models.UsersModel.scope('hasRole').findAll({
+    nest:false
+    });
+
+    if (result) {
+      return result;
+    }
+    return null;
+  }
   /**
    * 添加文章 到 对应的分组
    */

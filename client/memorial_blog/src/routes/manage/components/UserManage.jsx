@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Table, Badge, Tag, Modal, Input, message } from 'antd'
+import { Button, Table, Badge, Tag, Modal, Input, message, Space } from 'antd'
 
-import { getGroupList, createMenu, createArt } from '../../../services/api'
+import { getUsers, createMenu, createArt } from '../../../services/api'
 import _ from 'lodash';
 
 const MenuManagePage = (props) => {
+
+    const unImplementFunc = () => {
+        message.destroy();
+        message.warning({
+            title:'温馨提示',
+            content:'该功能还未实现'
+        });
+        return false;
+    }
 
 
     const columns = [
@@ -24,6 +33,7 @@ const MenuManagePage = (props) => {
             title: 'Role',
             dataIndex: 'role',
             width: '20%',
+            render: (text, record, index) => record.role.name || '~'
 
         },
         {
@@ -31,24 +41,52 @@ const MenuManagePage = (props) => {
             width: '30%',
             render: (text, record, index) => {
 
-                return <>
+                return <Space>
 
-                    <Button type="primary" danger >移除用户</Button>
-                </>
+                    <Button type="primary" onClick={unImplementFunc}>修改角色</Button>
+                    <Button type="primary" danger onClick={unImplementFunc}>移除用户</Button>
+                </Space>
 
             }
 
         },
     ];
 
-    const data = [
+    const initData = [
         {
             id: 1,
             name: 'userLi',
-            role: '管理员',
-            key:'1'
+            role: { name: '管理员' },
+            key: '1'
         }
     ]
+
+    let [data, setData] = useState(initData)
+
+
+    // getUsers
+    useEffect(() => {
+        async function fetchData() {
+            const result = await getUsers();
+
+
+
+            let r = result.data ? result.data.data.map(d => {
+                d.key = d.id;
+                return d;
+            }) : []
+
+
+
+            setData(r)
+
+
+        }
+        fetchData();
+    }, []);
+
+
+
 
 
 

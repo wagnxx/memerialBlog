@@ -16,17 +16,17 @@ const MenuManagePage = (props) => {
     useEffect(() => {
         async function fetchData() {
             const result = await fetGroupList();
-
-            let menuListGroupByGROUPID = _.groupBy(result.data, g => g.group_id);
+             
+            let menuListGroupByGROUPID = result && result.data ? _.groupBy(result.data, g => g.group_id) : {};
             console.log(menuListGroupByGROUPID)
-            var r = _.map(menuListGroupByGROUPID, function (value, prop) {
+            var r = Object.keys(menuListGroupByGROUPID).length > 0 ? _.map(menuListGroupByGROUPID, function (value, prop) {
                 let gName = value[0].name;
                 value = value.map(v => {
                     v.key = `${prop}-${v.art_id}`;
                     return v;
                 })
                 return { gid: prop, gName, key: prop, children: value };
-            });
+            }) : []
 
 
             setData(r)

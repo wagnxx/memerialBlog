@@ -72,9 +72,17 @@ export const filtterCode = (data) => {
     let code = data.data.code;
 
     switch (code) {
-      case 90000403:
+      case 90000401:
         cleanUserInfo();
-        message.info(codeMessage[code]);
+
+        message.info(data.data.comment);
+        return { data: null };
+        break;
+      case 90000403:
+        // cleanUserInfo();
+
+        message.info(data.data.comment);
+        return { data: null };
         break;
 
       default:
@@ -84,7 +92,8 @@ export const filtterCode = (data) => {
 };
 
 export const codeMessage = {
-  90000403: "未登录,请登录",
+  90000401: "token失效",
+  90000403: "没有访问权限",
 };
 
 // import fetch from 'dva/fetch';

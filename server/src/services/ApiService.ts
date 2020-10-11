@@ -96,9 +96,11 @@ class ApiService implements IApiService {
 
       let id = await users.get('id');
       let name = await users.get('name');
+      let role_id = await users.get('role_id');
       return {
         id,
         name,
+        role_id
       };
     } catch (error) {
       return null;
