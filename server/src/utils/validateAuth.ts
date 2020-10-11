@@ -18,40 +18,38 @@ export const checkLogin = async (ctx: IContext, next: () => Promise<any>) => {
 };
 
 export const checkIfSSVIP = async (ctx: IContext, next: () => Promise<any>) => {
-  if (ctx.session.roleId === ROLEMAP.SSVIP) {
+  if (ctx.session.roleId === ROLEMAP.SSVIP.value) {
     await next();
     return;
   }
 
-  ctx.body = new ErrorModel({
-    code: CODEMESSAGE.FORBIDDEN.code,
-    comment: CODEMESSAGE.FORBIDDEN.comment,
-  });
+  forbiddenResCode(ctx);
 };
 
 export const checkIfSVIP = async (ctx: IContext, next: () => Promise<any>) => {
-  if (ctx.session.roleId === ROLEMAP.SVIP) {
+  if (ctx.session.roleId === ROLEMAP.SVIP.value) {
     await next();
     return;
   }
 
-  ctx.body = new ErrorModel({
-    code: CODEMESSAGE.FORBIDDEN.code,
-    comment: CODEMESSAGE.FORBIDDEN.comment,
-  });
+  forbiddenResCode(ctx);
 };
 
 export const checkIfVIP = async (ctx: IContext, next: () => Promise<any>) => {
-  if (ctx.session.roleId === ROLEMAP.VIP) {
+  if (ctx.session.roleId === ROLEMAP.VIP.value) {
     await next();
     return;
   }
 
+  forbiddenResCode(ctx);
+};
+
+function forbiddenResCode(ctx: IContext) {
   ctx.body = new ErrorModel({
     code: CODEMESSAGE.FORBIDDEN.code,
     comment: CODEMESSAGE.FORBIDDEN.comment,
   });
-};
+}
 
 export const VALIDATE = {
   checkLogin,

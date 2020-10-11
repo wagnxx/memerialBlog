@@ -7,10 +7,22 @@ import {
   PrimaryKey,
   BelongsTo,
   ForeignKey,
+  Scopes,
 } from 'sequelize-typescript';
 import GroupArts from './groupArt.model';
 import UsersModel from './user.model';
 
+@Scopes({
+  ssArt:{
+    include:[
+      {
+        model:() => UsersModel,
+        attributes:[],
+        where:{id:1}
+      }
+    ]
+  }
+})
 @Table({ tableName: 'arts' })
 export default class Arts extends Model<Arts> {
   // @PrimaryKey
@@ -20,11 +32,10 @@ export default class Arts extends Model<Arts> {
   @Column
   title: string;
 
-  @Column
+  @Column(DataType.TEXT)
   content: string;
 
   @ForeignKey(() => UsersModel)
-  @Column(DataType.TEXT)
   created_id: string;
 
   @HasMany(() => GroupArts)

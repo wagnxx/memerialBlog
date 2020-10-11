@@ -29,11 +29,12 @@ export default class GroupArts extends Model<GroupArts> {
   art_id: number;
 
 
-  @BelongsTo(() => Groups)
-  g: Groups;
+  // @BelongsTo(() => Groups)
+  // g: Groups;
 
-  @BelongsTo(() => Arts)
-  a: Arts;
+  // @BelongsTo(() => Arts)
+  // a: Arts;
+
 
   // @BelongsTo(() => UsersModel)
   // u: UsersModel;

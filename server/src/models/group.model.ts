@@ -7,12 +7,28 @@ import {
   PrimaryKey,
   BelongsTo,
   ForeignKey,
+  Scopes,
+  BelongsToMany,
 } from 'sequelize-typescript';
 import GroupArts from './groupArt.model';
+import Arts from './art.model';
 
+@Scopes({
+  arts: {
+    include: [
+      {
+        model: () => Arts.scope('ssArt'),
+        attributes: {
+          include: ['title','id'],
+          exclude:['content']
+        },
+        where: { id: 1 },
+      },
+    ],
+  },
+})
 @Table({ tableName: 'groups' })
 export default class Groups extends Model<Groups> {
- 
   @PrimaryKey
   @Column
   id: number;
@@ -22,10 +38,8 @@ export default class Groups extends Model<Groups> {
 
   // group_id: number;
 
-
-
-  @HasMany(() => GroupArts)
-  groupArts: GroupArts[];
+  @BelongsToMany(() => Arts, { through: () => GroupArts })
+  arts: Arts[];
 }
 
 // @Table

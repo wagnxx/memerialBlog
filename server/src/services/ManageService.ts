@@ -11,6 +11,9 @@ class ManageService implements IManageService {
     let result = sequelize.models.UsersModel.scope('hasRole').findAll({
     nest:false
     });
+    // let result = sequelize.models.Groups.scope('arts').findAll({
+    // nest:false
+    // });
 
     if (result) {
       return result;
