@@ -10,8 +10,26 @@ import bodyParser from 'koa-bodyparser';
 const cors = require('koa2-cors'); //跨域处理
 
 import { REDIS_CONF } from '../config/db';
+import { next } from 'inversify-koa-utils';
+import mount = require('koa-mount');
+import graphqlHTTP = require('koa-graphql');
+import { buildSchema } from 'type-graphql';
+import { ArtResolver } from '../graphql/resolvers/ArtResolver';
+// import graphMiddleware from './graphMiddleware';
 
 export const entryMiddlewareSetting = (app: Application) => {
+  app.use(async (ctx, next) => {
+    if (ctx.request.url.indexOf('graph') > -1) {
+      console.log('进入graphsql的 middleWare了');
+      return graphqlHTTP({
+        schema: await buildSchema({
+          resolvers: [ArtResolver],
+        }),
+        graphiql: true,
+      });
+    }
+    next();
+  });
   app.use(
     cors({
       // origin: function(ctx:Router.IRouterContext) { //设置允许来自指定域名请求
@@ -42,7 +60,7 @@ export const entryMiddlewareSetting = (app: Application) => {
     );
   } else {
     // 若是线上环境
-    const logFileName = path.join(__dirname, '../..','logs', 'access.log');
+    const logFileName = path.join(__dirname, '../..', 'logs', 'access.log');
     const writeStream = fs.createWriteStream(logFileName, {
       // 创建文件的写入流
       flags: 'a',

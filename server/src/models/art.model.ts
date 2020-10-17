@@ -11,17 +11,19 @@ import {
 } from 'sequelize-typescript';
 import GroupArts from './groupArt.model';
 import UsersModel from './user.model';
+import { Field, Int, ObjectType } from 'type-graphql';
 
+@ObjectType()
 @Scopes({
-  ssArt:{
-    include:[
+  ssArt: {
+    include: [
       {
-        model:() => UsersModel,
-        attributes:[],
-        where:{id:1}
-      }
-    ]
-  }
+        model: () => UsersModel,
+        attributes: [],
+        where: { id: 1 },
+      },
+    ],
+  },
 })
 @Table({ tableName: 'arts' })
 export default class Arts extends Model<Arts> {
@@ -29,12 +31,14 @@ export default class Arts extends Model<Arts> {
   // @Column
   // id: number;
 
+  @Field()
   @Column
   title: string;
 
   @Column(DataType.TEXT)
   content: string;
 
+  @Field(() => Int)
   @ForeignKey(() => UsersModel)
   created_id: string;
 

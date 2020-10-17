@@ -6,7 +6,7 @@ import { sequelize } from '../config/mysql';
 import Users from 'src/models/user.model';
 import { cpus } from 'os';
 import { QueryTypes } from 'sequelize';
-import Arts from 'src/models/art.model';
+import Arts from '../models/art.model';
 import { ErrorModel, SuccessModel } from '../../src/models/resModel';
 // import QueryTypes from 'sequelize/types/lib/query-types';
 
@@ -19,6 +19,7 @@ class ApiService implements IApiService {
   public async getTestData(ctx: IContext) {
     // let data = sequelize.models.GroupArts.findAll();
     // return data;
+    return {aa:3456}
     const userId = ctx.request.query.id;
 
     if (!userId) return new ErrorModel('参数不正确');
