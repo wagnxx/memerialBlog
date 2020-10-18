@@ -1,10 +1,5 @@
 import path = require('path');
-import {
-  GeneratingSchemaError,
-  buildSchema,
-  BuildSchemaOptions,
-  NonEmptyArray,
-} from 'type-graphql';
+import { buildSchema, NonEmptyArray } from 'type-graphql';
 import Koa from 'koa';
 import { ApolloServer } from 'apollo-server-koa';
 
@@ -34,6 +29,6 @@ export async function integrateGraphql(
     introspection: true,
     context: ({ ctx }) => ctx,
   });
-  server.applyMiddleware({ app, ...entryMiddlewareSetting });
+  server.applyMiddleware({ app, cors: false });
   return server;
 }

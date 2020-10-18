@@ -7,7 +7,7 @@ var redisStore = require('koa-redis');
 
 const logger = require('koa-logger');
 import bodyParser from 'koa-bodyparser';
-const cors = require('koa2-cors'); //跨域处理
+import cors from 'koa2-cors'; //跨域处理
 
 import { REDIS_CONF } from '../config/db';
 import { next } from 'inversify-koa-utils';
@@ -15,42 +15,31 @@ import mount = require('koa-mount');
 import graphqlHTTP = require('koa-graphql');
 import { buildSchema } from 'type-graphql';
 import { ArtResolver } from '../graphql/resolvers/ArtResolver';
+import { integrateGraphql } from '../graphql';
 // import graphMiddleware from './graphMiddleware';
 
 export const entryMiddlewareSetting = (app: Application) => {
-  app.use(async (ctx, next) => {
-    if (ctx.request.url.indexOf('graph') > -1) {
-      console.log('进入graphsql的 middleWare了');
-      return graphqlHTTP({
-        schema: await buildSchema({
-          resolvers: [ArtResolver],
-        }),
-        graphiql: true,
-      });
-    }
-    next();
-  });
-  app.use(
-    cors({
-      // origin: function(ctx:Router.IRouterContext) { //设置允许来自指定域名请求
-      //     if (ctx.url != '/test') {
-      //         return '*'; // 允许来自所有域名请求
-      //     }
-      //     return '*'; //只允许http://localhost:8080这个域名的请求
-      // },
-      origin: 'http://localhost:8000',
-      // origin: '*',
-      // maxAge: 5, //指定本次预检请求的有效期，单位为秒。
-      credentials: true, //是否允许发送Cookie
-      allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], //设置所允许的HTTP请求方法
-      allowHeaders: ['Content-Type', 'Authorization', 'Accept'], //设置服务器支持的所有头信息字段
-      // exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'], //设置获取其他自定义字段
-    })
-  );
+  // app.use(
+  //   cors({
+  //     // origin: function(ctx:Router.IRouterContext) { //设置允许来自指定域名请求
+  //     //     if (ctx.url != '/test') {
+  //     //         return '*'; // 允许来自所有域名请求
+  //     //     }
+  //     //     return '*'; //只允许http://localhost:8080这个域名的请求
+  //     // },
+  //     origin: 'http://localhost:8000',
+  //     // origin: '*',
+  //     // maxAge: 5, //指定本次预检请求的有效期，单位为秒。
+  //     credentials: true, //是否允许发送Cookie
+  //     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], //设置所允许的HTTP请求方法
+  //     allowHeaders: ['Content-Type', 'Authorization', 'Accept'], //设置服务器支持的所有头信息字段
+  //     // exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'], //设置获取其他自定义字段
+  //   })
+  // );
 
   // add body parser
   app.use(bodyParser());
-
+  // integrateGraphql(app, null);
   const ENV = process.env.NODE_ENV;
   if (ENV == 'production') {
     app.use(

@@ -10,11 +10,11 @@ module.exports = {
     //   target: "http://localhost:8000/",
     //   pathRewrite: { "^/addr.*$": "/" },
     // },
-    // "/api": {
-    //   target: "http://localhost:3000/api",
-    //   pathRewrite: { "^/api": "/api" },
-   
-    // },
+    "/api": {
+      target: "http://localhost:3000",
+      changeOrigin: true,
+      pathRewrite: { "^/api": "/api" },
+    },
   },
   disableCSSModules: true,
 };

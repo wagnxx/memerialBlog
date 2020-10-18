@@ -3,7 +3,7 @@ import request from "../utils/request";
 /**
  *  pre path config
  */
-const prePath = 1 ? "http://localhost:3000/api" : "/modck_api/";
+const prePath = 1 ? "api" : "/modck_api/";
 
 /**
  * fetch list
