@@ -29,6 +29,6 @@ export async function integrateGraphql(
     introspection: true,
     context: ({ ctx }) => ctx,
   });
-  server.applyMiddleware({ app, cors: false });
+  server.applyMiddleware({ app, cors: true,path:'/graphql' });
   return server;
 }

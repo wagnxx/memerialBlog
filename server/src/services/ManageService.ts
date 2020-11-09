@@ -120,10 +120,12 @@ class ManageService implements IManageService {
       g.id as group_id,
       g.name,
       ga.art_id,
-      a.title
+      a.title,
+      u.name as username
       from groups g 
+      join users u 
       left join group_arts ga on g.id=ga.group_id 
-      left join arts a on a.id=ga.art_id and a.created_id=${userId};
+      left join arts a on a.id=ga.art_id and a.created_id=u.id;
       ;
     `;
 

@@ -67,7 +67,7 @@ export const entryMiddlewareSetting = (app: Application) => {
     session({
       cookie: {
         path: '/',
-        httpOnly: false,
+        httpOnly: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
         store: redisStore({
           all: `${REDIS_CONF.host}:${REDIS_CONF.port}`,

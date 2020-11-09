@@ -43,7 +43,7 @@ const MenuManagePage = (props) => {
             width: '20%',
             render: (text, record, index) => {
                 if (record.gid) {
-                    return record.gName;
+                    return <strong>{record.gName}</strong>;
                 } else {
                     return record.title
                 }
@@ -52,12 +52,24 @@ const MenuManagePage = (props) => {
         {
             title: 'group_id / art_id',
             dataIndex: 'id',
-            width: '30%',
+            // width: '30%',
             render: (text, record, index) => {
                 if (record.gid) {
                     return record.gid;
                 } else {
                     return record.art_id
+                }
+            }
+        },
+        {
+            title: '创建者',
+            dataIndex: 'username',
+            // width: '30%',
+            render: (text, record, index) => {
+                if (record.gid) {
+                    return  'sys';
+                } else {
+                    return record.username
                 }
             }
         },

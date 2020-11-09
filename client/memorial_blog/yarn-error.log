@@ -1,0 +1,55 @@
+Arguments: 
+  /home/wagnxx/.nvm/versions/node/v12.6.0/bin/node /home/wagnxx/.nvm/versions/node/v12.6.0/bin/yarn add apollo-boost
+
+PATH: 
+  /home/wagnxx/Desktop/work/yd-note/pros/yd-cocos/cocos2d-x/cocos2d-x-3.17.2/templates:/home/wagnxx/Desktop/work/yd-note/pros/yd-cocos/cocos2d-x:/home/wagnxx/Desktop/work/yd-note/pros/yd-cocos/cocos2d-x/cocos2d-x-3.17.2/tools/cocos2d-console/bin:/home/wagnxx/.nvm/versions/node/v12.6.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/local/maven/apache-maven-3.6.2/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/local/jdk/jdk1.8.0_231/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/bin:/bin:/home/wagnxx/Android/Sdk/tools:/home/wagnxx/Android/Sdk/tools/bin:/home/wagnxx/Android/Sdk/platform-tools:/home/wagnxx/Android/Sdk/emulator
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  12.6.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/home/wagnxx/.cache/yarn/v6/npm-pify-4.0.1-4b2cd25c50d598735c50292224fd8c6df41e3231-integrity/node_modules/pify/index.js' -> '/home/wagnxx/Desktop/playing/memorial_blog/client/memorial_blog/node_modules/af-webpack/node_modules/pify/index.js'
+
+npm manifest: 
+  {
+    "private": true,
+    "scripts": {
+      "start": "roadhog server",
+      "build": "roadhog build",
+      "lint": "eslint --ext .js src test",
+      "precommit": "npm run lint"
+    },
+    "dependencies": {
+      "antd": "^4.6.2",
+      "babel-plugin-import": "^1.13.0",
+      "dva": "^2.4.1",
+      "lodash": "^4.17.20",
+      "react": "^16.2.0",
+      "react-dom": "^16.2.0",
+      "react-quill": "^1.3.5"
+    },
+    "devDependencies": {
+      "babel-plugin-dva-hmr": "^0.3.2",
+      "eslint": "^4.14.0",
+      "eslint-config-umi": "^0.1.1",
+      "eslint-plugin-flowtype": "^2.34.1",
+      "eslint-plugin-import": "^2.6.0",
+      "eslint-plugin-jsx-a11y": "^5.1.1",
+      "eslint-plugin-react": "^7.1.0",
+      "husky": "^0.12.0",
+      "redbox-react": "^1.4.3",
+      "roadhog": "^2.5.0-beta.4"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
