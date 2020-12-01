@@ -41,6 +41,7 @@ function IndexPage(props) {
               </Menu.Item>
 
               <Menu.Item><Link to="/setting">设置</Link></Menu.Item>
+              <Menu.Item><Link to="/gql">GraphQL </Link></Menu.Item>
             </Menu.SubMenu>
           </Menu>
         </div>

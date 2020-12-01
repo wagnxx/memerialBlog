@@ -1,7 +1,7 @@
 import path = require('path');
 import { buildSchema, NonEmptyArray } from 'type-graphql';
 import Koa from 'koa';
-import { ApolloServer } from 'apollo-server-koa';
+import { ApolloServer,PubSub } from 'apollo-server-koa';
 
 // 获取匹配所有resolver的路径
 function getResolvers(): NonEmptyArray<Function> | NonEmptyArray<string> {
@@ -15,20 +15,26 @@ export async function getSchema() {
   });
 }
 
+const pubsub = new PubSub();
+
 export async function integrateGraphql(
   app: Koa<Koa.DefaultState, Koa.DefaultContext>,
-  entryMiddlewareSetting
+  httpServer
 ) {
   const server = new ApolloServer({
     schema: await getSchema(),
+    // subscriptions:{
+    //   path:'/sub'
+    // },
     playground: {
       settings: {
         'request.credentials': 'include',
       },
     } as any,
     introspection: true,
-    context: ({ ctx }) => ctx,
+    context: ({ ctx, pubsub }) => ctx,
   });
   server.applyMiddleware({ app, cors: true,path:'/graphql' });
+  server.installSubscriptionHandlers(httpServer);
   return server;
 }
